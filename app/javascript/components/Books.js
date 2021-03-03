@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
-import Books from './Books'
+import React from 'react';
+import Book from "./Book";
 
-const App = (props) => {
-    const [books, setBooks] = useState([])
+const Books = (props) => {
+    const { books } = props;
     
-    const getBooks = () => {
-       console.log('clicked, TODO: make this work') 
-    }
-   
+    const renderBooks = () => {
+      if (books.length === 0){
+        return <h1>No Books Available</h1>;
+      }
+      return books.map((book) => {
+        return <Book key={book.id} {...book} />;
+      });
+    };
+
     return (
-      <div>
-        <h1>App Page</h1>
-        <button onClick={getBooks()}>Get Books From DataBase</button>
-        <Books books={books} />
+      <div className="books-container">
+        <h1>Books component</h1>
+        {renderBooks()}
       </div>
     );
 
-}
+};
 
-export default App;
+export default Books;
